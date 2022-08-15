@@ -18,8 +18,9 @@ describe('backend-express-template routes', () => {
     const res = await request(app).post('/api/v1/users').send(mockUser);
     const { email } = mockUser;
     expect(res.body).toEqual({
-      id: expect.any(String),
-      email,
+      message: 'Signed in successfully!',
+      user: { id: expect.any(String),
+        email, }
     });
   });
   afterAll(() => {
