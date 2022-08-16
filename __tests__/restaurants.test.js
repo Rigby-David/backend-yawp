@@ -15,4 +15,8 @@ describe('backend-express-template routes', () => {
     expect(res.status).toBe(200);
     expect(res.body.length).toEqual(4);
   });
+  it('should show a list of nested reviews', async () => {
+    const res = await request(app).get('/api/v1/restaurants/1');
+    expect(res.status).toBe(200);
+  });
 });
