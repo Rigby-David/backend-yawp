@@ -27,20 +27,27 @@ describe('backend-express-template routes', () => {
   });
   it('creates new review for auth users', async () => {
     const newReview = {
-      stars: 2,
-      content:
+      stars: '2',
+      detail:
         'The manager was very rude when I asked for my food to be served in a tupperware bowl so my dog could eat my leftovers. I will NOT be eating here again.',
     };
 
     const agent = request.agent(app);
+    await agent.post('/api/v1/users').send({
+      email: 'admin5',
+      password: '12345',
+      firstName: 'test',
+      lastName: 'tester',
+    });
     await agent.post('/api/v1/users').send(newReview);
 
     const res = await agent
       .post('/api/v1/restaurants/1/reviews')
       .send(newReview);
+    console.log('res.body', res.body);
     expect(res.status).toBe(200);
     expect(res.body).toEqual({
-      id: expect.any(String),
+      id: '2',
       user_id: expect.any(String),
       restaurant_id: expect.any(String),
       ...newReview,
