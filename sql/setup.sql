@@ -45,15 +45,17 @@ VALUES
 CREATE TABLE reviews (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     stars BIGINT,
-    detail TEXT
+    detail VARCHAR(255) NOT NULL,
+    restaurant_id BIGINT,
+    user_id BIGINT
 );
 
 INSERT INTO reviews (
+    restaurant_id,
+    user_id,
     stars,
     detail
 )
 
 VALUES 
-('5', 'Very good'),
-('3', 'Good for a quick meal. Affordable'),
-('4', 'The service was fantastic. Food was okay');
+(1, 1, '5', 'Very good');
