@@ -3,6 +3,7 @@
 
 DROP TABLE IF EXISTS yawp_users;
 DROP TABLE IF EXISTS restaurants;
+DROP TABLE IF EXISTS reviews;
 
 CREATE TABLE yawp_users (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -40,3 +41,19 @@ VALUES
 ('Yummy Mexican', 'Mexican'),
 ('Good Italian', 'Italian'),
 ('Banzai Sushi', 'Sushi');
+
+CREATE TABLE reviews (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    stars BIGINT,
+    detail TEXT
+);
+
+INSERT INTO reviews (
+    stars,
+    detail
+)
+
+VALUES 
+('5', 'Very good'),
+('3', 'Good for a quick meal. Affordable'),
+('4', 'The service was fantastic. Food was okay');
