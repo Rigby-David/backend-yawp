@@ -2,6 +2,7 @@
 -- The SQL in this file will be executed when you run `npm run setup-db`
 
 DROP TABLE IF EXISTS yawp_users;
+DROP TABLE IF EXISTS restaurants;
 
 CREATE TABLE yawp_users (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -22,3 +23,20 @@ VALUES
 ('test1', 'test1', 'test1@test.com', 'nottest1passwordhash'),
 ('test2', 'test2', 'test2@test.com', 'nottest2passwordhash'),
 ('test3', 'test3', 'test3@test.com', 'nottest3passwordhash');
+
+CREATE TABLE restaurants (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    type TEXT NOT NULL
+);
+
+INSERT INTO restaurants (
+    name,
+    type
+)
+
+VALUES
+('Fast Pizza', 'Pizza'),
+('Yummy Mexican', 'Mexican'),
+('Good Italian', 'Italian'),
+('Banzai Sushi', 'Sushi');
