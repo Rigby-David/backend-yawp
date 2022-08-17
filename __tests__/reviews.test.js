@@ -13,7 +13,7 @@ describe('backend-express-template routes', () => {
 
   it('#DELETE should return 401 for unauth users', async () => {
     const res = await request(app).delete('/api/v1/reviews/1');
-
+    console.log('res.body', res.body);
     expect(res.status).toBe(401);
   });
   it('#DELETE should return status 200 for user with the same user_id', async () => {

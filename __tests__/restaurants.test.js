@@ -44,7 +44,6 @@ describe('backend-express-template routes', () => {
     const res = await agent
       .post('/api/v1/restaurants/1/reviews')
       .send(newReview);
-    console.log('res.body', res.body);
     expect(res.status).toBe(200);
     expect(res.body).toEqual({
       id: '2',
