@@ -34,7 +34,7 @@ describe('backend-express-template routes', () => {
     expect(res.status).toBe(401);
   });
   it('#DELETE should delete review for user w/ matching user_id', async () => {
-    const [agent, user] = await registerAndLogin();
+    const [agent] = await registerAndLogin();
 
     const { body: review } = await agent
       .post('/api/v1/restaurants/1/reviews')
@@ -43,7 +43,7 @@ describe('backend-express-template routes', () => {
         detail: 'no good',
       });
     const res = await agent.delete(`/api/v1/reviews/${review.id}`);
-    console.log('res.body', res.body);
+    // console.log('res.body', res.body);
     expect(res.status).toBe(204);
   });
 });
