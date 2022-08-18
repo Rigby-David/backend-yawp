@@ -23,7 +23,8 @@ INSERT INTO yawp_users (
 VALUES
 ('test1', 'test1', 'test1@test.com', 'nottest1passwordhash'),
 ('test2', 'test2', 'test2@test.com', 'nottest2passwordhash'),
-('test3', 'test3', 'test3@test.com', 'nottest3passwordhash');
+('test3', 'test3', 'test3@test.com', 'nottest3passwordhash'),
+('Test5', 'User5', 'test4@test.com', 'snzVh9sBJ45fAu5JwRc81Ud9q6pfnSQbt9j8e/YxJa5zi');
 
 CREATE TABLE restaurants (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -60,4 +61,5 @@ INSERT INTO reviews (
 )
 
 VALUES 
-(1, 1, '5', 'Very good');
+(1, 1, '5', 'Very good'),
+(4, 4, '5', 'BANZAI');

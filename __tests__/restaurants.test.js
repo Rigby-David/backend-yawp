@@ -46,7 +46,7 @@ describe('backend-express-template routes', () => {
       .send(newReview);
     expect(res.status).toBe(200);
     expect(res.body).toEqual({
-      id: '2',
+      id: '3',
       user_id: expect.any(String),
       restaurant_id: expect.any(String),
       ...newReview,

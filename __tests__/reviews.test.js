@@ -2,12 +2,23 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const UserService = require('../lib/services/UserService');
 
-const mockUsers = {
+const mockUser = {
   firstName: 'John',
   lastName: 'Cena',
   email: 'test@cena.com',
   password: '12345',
+};
+
+const registerAndLogin = async (userProps = {}) => {
+  const password = userProps.password ?? mockUser.password;
+
+  const agent = request.agent(app);
+  const [user] = await UserService.create({ ...mockUser, ...userProps });
+  const { email } = user;
+  await agent.post('/api/v1/users/sessions').send({ email, password });
+  return [agent, user];
 };
 
 describe('backend-express-template routes', () => {
@@ -23,22 +34,16 @@ describe('backend-express-template routes', () => {
     expect(res.status).toBe(401);
   });
   it('#DELETE should delete review for user w/ matching user_id', async () => {
-    const newReview = {
-      stars: '3',
-      detail: 'The food was affordable',
-    };
-    const agent = request.agent(app);
-    await agent.post('/api/v1/users').send(mockUsers);
+    const [agent, user] = await registerAndLogin();
 
-    const response = await agent
-      .post('/api/v1/restaurants/2/reviews')
-      .send(newReview);
-    expect(response.status).toBe(200);
-
-    const res = await agent.delete('/api/v1/reviews/3');
-    expect(res.status).toBe(200);
-
-    // const resp = await agent.get('/api/v1/reviews/3');
-    // expect(resp.status).toBe(404);
+    const { body: review } = await agent
+      .post('/api/v1/restaurants/1/reviews')
+      .send({
+        stars: 1,
+        detail: 'no good',
+      });
+    const res = await agent.delete(`/api/v1/reviews/${review.id}`);
+    console.log('res.body', res.body);
+    expect(res.status).toBe(204);
   });
 });
